@@ -6,15 +6,7 @@ This package provides simple RSS Feed generation for your [KeystoneJS](http://ke
 
 This is a first crude implementation of creating RSS feeds for models within Keystone. [KeystoneJS](http://keystonejs.com/) is a powerful CMS/Web App platform, which can be used to create blog-esq content feeds.
 
-### How do I get set up? ###
-
-1. Install this package
-
-    ```
-    npm install keystone-rss --save
-    ```
-
-2. Inside index.js add the following:
+Inside index.js add the following:
 
     ```
     var keystone = require('keystone');
@@ -58,10 +50,12 @@ This is a first crude implementation of creating RSS feeds for models within Key
 
 3. For each feed item it expects:
     + title
-    + content.brief
+    + content.extended
     + slug
     + publishedDate
     + state
+    + author(s)
+    + image.secure_url
 
 `state` is used to filter drafts, and the rest are parsed into xml as:
 
@@ -70,12 +64,6 @@ title:  post.title,
 description: post.content.brief,
 url: feedUrl + post.slug,
 date: post.publishedDate,
+author: post.name[1].first + ' ' + post.name[1].last + ', ' + post.name[2].first + ' ' + post.name[2].last ...
+enclosure: post.image.secure_url
 ```
-
-### Contribution guidelines ###
-
-Happy to accept any suggestions and contributions. As previously stated, this is a very crude first implementation.
-
-### Who do I talk to? ###
-
-* [Max Clayton Clowes](www.twitter.com/mcclowes) from [Codogo](https://codogo.io)
