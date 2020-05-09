@@ -1,0 +1,41 @@
+{
+  "_from": "keystone-rss@^1.0.6",
+  "_id": "keystone-rss@1.0.6",
+  "_inBundle": false,
+  "_integrity": "sha1-Q03VAcJnMaggET5jnLjr2MrcWc4=",
+  "_location": "/keystone-rss",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "keystone-rss@^1.0.6",
+    "name": "keystone-rss",
+    "escapedName": "keystone-rss",
+    "rawSpec": "^1.0.6",
+    "saveSpec": null,
+    "fetchSpec": "^1.0.6"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/keystone-rss/-/keystone-rss-1.0.6.tgz",
+  "_shasum": "434dd501c26731a820113e639cb8ebd8cadc59ce",
+  "_spec": "keystone-rss@^1.0.6",
+  "_where": "/Users/cryptodeal/Desktop/tankie-news",
+  "author": "",
+  "bundleDependencies": false,
+  "dependencies": {
+    "date-format-lite": "^0.7.1",
+    "rss": "^1.2.1",
+    "setheaders": "0.1.7"
+  },
+  "deprecated": false,
+  "description": "This package provides simple RSS Feed generation for your [KeystoneJS](http://keystonejs.com/) data models.",
+  "license": "ISC",
+  "main": "index.js",
+  "name": "keystone-rss",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.0.6"
+}
