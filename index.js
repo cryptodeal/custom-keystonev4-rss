@@ -21,7 +21,7 @@ var KeystoneRSS = function(keystone, req, res) {
 				var name = '';
 				for (var j = 0; j < results[i].author.length; j++) {
 					if (j < results[i].author.length - 1) {
-						name = name + results[i].author[j].name.first + ' ' + results[i].author[j].name.last + ',' + ' '
+						name = name + results[i].author[j].name.first + ' ' + results[i].author[j].name.last + ', '
 					} else name = name + results[i].author[j].name.first + ' ' + results[i].author[j].name.last
 				}
 				feed.item({
