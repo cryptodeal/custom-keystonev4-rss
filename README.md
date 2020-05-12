@@ -22,6 +22,9 @@ Inside index.js add the following:
             rss.create(keystone, req, res, {
                 /* The model that is the subject of the feed */
                 model: 'Post',
+                
+                /* The category that is being displayed in this feed */
+			    category: 'categoryname',
 
                 /* RSS Feed meta data */
                 meta: {
