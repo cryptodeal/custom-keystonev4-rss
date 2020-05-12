@@ -1,22 +1,34 @@
 var dateFormat = require('date-format-lite'),
 	rss = require('rss'),
 	setHeaders = require('setheaders').setWritableHeader;
+	var async = require('async');
 
 var KeystoneRSS = function(keystone, req, res) {
 	var map = {};
 	var route = {};
 	var dynamicRoutes = [];
 	var dateFormatString = 'YYYY-MM-DD';
+	
 
 	/* Retrieve selected model and compile feed structure from model entries */
-	var parseItems = function(feedModel, feedMeta, feedUrl) {
+	var parseItems = function(feedModel, feedCategory, feedMeta, feedUrl) {
 		var feed = new rss(feedMeta);
-
-		var q = keystone.list(feedModel).model.find().sort('-publishedDate').populate('author').where('state', 'published').exec(function (err, results) {
-			if (err || !results.length) {
+		async.waterfall([
+			function getCategory(done) {
+				// use findOne, not find -- as you only want to retrive ONE user; using find is more expensive
+				keystone.list('PostCategory').model.findOne({ key: feedCategory }).exec(done)
+			},
+			function getPosts(category, done) {
+				keystone.list(feedModel).model.find().sort('-publishedDate').where('state', 'published').populate('author categories')
+				.where('categories').in([category])
+				.exec(done);
+			},
+		], function (err, results) {
+			// if an error occurs during the above tasks ^, it will come down here
+			if (err) {
 				return err;
 			}
-
+			// otherwise if all tasks finish, it will come down here
 			for (var i = 0; i < results.length; i++) {
 				var name = '';
 				for (var j = 0; j < results[i].author.length; j++) {
@@ -60,7 +72,7 @@ var KeystoneRSS = function(keystone, req, res) {
 		res = rs;
 		options = opt;
 
-		parseItems(options.model, options.meta, options.url);
+		parseItems(options.model, options.category, options.meta, options.url);
 	};
 
 	return {
